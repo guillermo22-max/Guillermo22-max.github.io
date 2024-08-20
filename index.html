@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+     <header class="header">
+
+        <div class="menu container">
+            <a href="#" class="logo">FUDI&Co</a>
+            <input type="checkbox"  id="menu" />
+            <label for="menu">
+                <img src="/img/menu.png" class="menu-icono" alt="menu">
+            </label>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="#">inicio</a></li>
+                    <li><a href="#">servicios</a></li>
+                    <li><a href="#">productos</a></li>
+                    <li><a href="#">contacto</a></li>
+                </ul>
+            </nav>
+            <div>
+                <ul>
+                    <li class="submenu">
+                        <img src="/img/car.svg" id="img-carrito" alt="carrito">
+                        <div id="carrito">
+                            <table id="lista-carrito">
+                                <thead>
+                                    <tr>
+                                        <th>Imagen</th>
+                                        <th>Nombre</th>
+                                        <th>Precio</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <a href="#" id="vaciar-carrito" class="btn-2">Vaciar Carrito</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="header-content container">
+            <div class="header-img">
+                <img src="/img/promo.3.png" alt="">
+            </div>
+            <div class="header-txt">
+                <h1>Ofertas especiales</h1>
+                <p>Calidad premium</p>
+                <a href="#" class="btn-1">Información</a>
+            </div>
+        </div>
+
+     </header>
+
+     <section class="ofert container">
+        <div class="ofert-1">
+            <div class="ofert-img">
+                <img src="/img/cafe-australiano.jpg" alt="">
+            </div>
+            <div class="ofert-txt">
+                <h3>Cappuccio Vienes</h3>
+                <a href="#" class="btn-2">Información</a>
+            </div>
+        </div>
+
+        <div class="ofert-1">
+            <div class="ofert-img">
+                <img src="/img/cafe-helado.jpg" alt="">
+            </div>
+            <div class="ofert-txt">
+                <h3>batido de Helado</h3>
+                <a href="#" class="btn-2">Información</a>
+            </div>
+        </div>
+
+        <div class="ofert-1">
+            <div class="ofert-img">
+                <img src="/img/cafe-irish.jpg" alt="">
+            </div>
+            <div class="ofert-txt">
+                <h3>Frappuccino</h3>
+                <a href="#" class="btn-2">Información</a>
+            </div>
+        </div>
+     </section>
+
+     <main class="products container" id="lista-1">
+
+        <h2>Productos</h2>
+
+        <div class="product-content">
+
+            <div class="product">
+                <img src="/img/cafe-viena.jpg" alt="">
+                <div class="product-txt">
+                    <h3>Cappucino</h3>
+                    <p>Calidad Premium</p>
+                    <p class="Precio">3,00 €</p>
+                    <a href="#" class="agregar-carrito btn-2" data-id="1">Agregar al Carrito</a>
+                </div>
+            </div>
+
+            <div class="product">
+                <img src="/img/cafe-ingles.jpg" alt="">
+                <div class="product-txt">
+                    <h3>Café Ingles</h3>
+                    <p>Calidad Premium</p>
+                    <p class="Precio">4,50 €</p>
+                    <a href="#" class="agregar-carrito btn-2" data-id="2">Agregar al Carrito</a>
+                </div>
+            </div>
+
+            <div class="product">
+                <img src="/img/cafe-liqueurs.jpg" alt="">
+                <div class="product-txt">
+                    <h3>Iced Latte</h3>
+                    <p>Calidad Premium</p>
+                    <p class="Precio">4,50 €</p>
+                    <a href="#" class="agregar-carrito btn-2" data-id="3">Agregar al Carrito</a>
+                </div>
+            </div>
+
+            <div class="product">
+                <img src="/img/cafe-viena.jpg" alt="">
+                <div class="product-txt">
+                    <h3>Latte</h3>
+                    <p>Calidad Premium</p>
+                    <p class="Precio">2,70 €</p>
+                    <a href="#" class="agregar-carrito btn-2" data-id="4">Agregar al Carrito</a>
+                </div>
+            </div>
+
+            <div class="product">
+                <img src="/img/cafe-viena.jpg" alt="">
+                <div class="product-txt">
+                    <h3>Cafe con leche</h3>
+                    <p>Calidad Premium</p>
+                    <p class="Precio">2,50 €</p>
+                    <a href="#" class="agregar-carrito btn-2" data-id="5">Agregar al Carrito</a>
+                </div>
+            </div>
+
+            <div class="product">
+                <img src="/img/cafe-viena.jpg" alt="">
+                <div class="product-txt">
+                    <h3>Flat White</h3>
+                    <p>Calidad Premium</p>
+                    <p class="Precio">3,30 €</p>
+                    <a href="#" class="agregar-carrito btn-2" data-id="6">Agregar al Carrito</a>
+                </div>
+            </div>
+
+        </div>
+
+     </main>
+
+     <section class="blog container">
+
+        <div class="blog-1">
+            <img src="/img/blog-1.jpg" alt="">
+            <h3>Blog 1</h3>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
+               Nulla aspernatur sed tempore ullam maiores corporis, 
+               cumque dolorem vero saepe adipisci nesciunt temporibus 
+               deserunt consequuntur dicta cupiditate! Facere laudantium nam animi!</p>
+        </div>
+
+        <div class="blog-1">
+            <img src="/img/blog-2.jpg" alt="">
+            <h3>Blog 2</h3>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
+               Nulla aspernatur sed tempore ullam maiores corporis, 
+               cumque dolorem vero saepe adipisci nesciunt temporibus 
+               deserunt consequuntur dicta cupiditate! Facere laudantium nam animi!</p>
+        </div>
+
+        <div class="blog-1">
+            <img src="/img/blog-3.jpg" alt="">
+            <h3>Blog 3</h3>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
+               Nulla aspernatur sed tempore ullam maiores corporis, 
+               cumque dolorem vero saepe adipisci nesciunt temporibus 
+               deserunt consequuntur dicta cupiditate! Facere laudantium nam animi!</p>
+        </div>
+
+     </section>
+
+     <footer class="footer">
+
+        <div class="footer-content container">
+
+            <div class="link">
+                <h3>lorem</h3>
+                <ul>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                </ul>
+            </div>
+
+            <div class="link">
+                <h3>lorem</h3>
+                <ul>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                </ul>
+            </div>
+
+            <div class="link">
+                <h3>lorem</h3>
+                <ul>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                </ul>
+            </div>
+
+            <div class="link">
+                <h3>lorem</h3>
+                <ul>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+     </footer>
+
+    <script src="index.js"></script>
+</body>
+</html>
