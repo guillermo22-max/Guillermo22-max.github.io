@@ -1,17 +1,23 @@
+// Variables globales
 const carrito = document.querySelector('#carrito tbody');
 const vaciarCarritoBtn = document.querySelector('#vaciar-carrito');
 const listaProductos = document.querySelector('#lista-1');
-const contadorProductos = document.querySelector('#contador-productos'); 
+const contadorProductos = document.querySelector('#contador-productos'); // Nuevo contador de productos
 let articulosCarrito = [];
 
+// Función para cargar todos los event listeners
 cargarEventListeners();
 function cargarEventListeners() {
+    // Agregar un producto al carrito al hacer click en "Agregar al Carrito"
     listaProductos.addEventListener('click', agregarProducto);
 
+    // Eliminar productos del carrito
     carrito.addEventListener('click', eliminarProducto);
 
+    // Incrementar productos dentro del carrito
     carrito.addEventListener('click', incrementarProducto);
 
+    // Decrementar productos dentro del carrito
     carrito.addEventListener('click', decrementarProducto);
 
     // Vaciar el carrito
@@ -23,6 +29,7 @@ function cargarEventListeners() {
     });
 }
 
+// Función para agregar el producto al carrito
 function agregarProducto(e) {
     e.preventDefault();
     if (e.target.classList.contains('agregar-carrito')) {
@@ -31,6 +38,7 @@ function agregarProducto(e) {
     }
 }
 
+// Lee los datos del producto seleccionado
 function leerDatosProducto(producto) {
     const infoProducto = {
         imagen: producto.querySelector('img').src,
@@ -40,31 +48,37 @@ function leerDatosProducto(producto) {
         cantidad: 1
     };
 
+    // Revisa si un producto ya existe en el carrito
     const existe = articulosCarrito.some(producto => producto.id === infoProducto.id);
     if (existe) {
         // Actualizamos la cantidad
         const productos = articulosCarrito.map(producto => {
             if (producto.id === infoProducto.id) {
                 producto.cantidad++;
-                return producto; 
+                return producto; // Retorna el producto actualizado
             } else {
-                return producto; 
+                return producto; // Retorna los productos que no son los duplicados
             }
         });
         articulosCarrito = [...productos];
     } else {
+        // Agrega elementos al arreglo de carrito
         articulosCarrito = [...articulosCarrito, infoProducto];
     }
 
+    // Actualiza el HTML del carrito
     carritoHTML();
+    // Actualiza el contador del carrito
     actualizarContador();
 }
 
+// Elimina un producto del carrito
 function eliminarProducto(e) {
     e.preventDefault();
     if (e.target.classList.contains('borrar')) {
         const productoId = e.target.getAttribute('data-id');
 
+        // Elimina del arreglo de artículos del carrito por el data-id
         articulosCarrito = articulosCarrito.filter(producto => producto.id !== productoId);
 
         carritoHTML(); // Itera sobre el carrito y muestra su HTML
@@ -73,10 +87,12 @@ function eliminarProducto(e) {
     }
 }
 
+// Incrementa la cantidad de un producto en el carrito
 function incrementarProducto(e) {
     if (e.target.classList.contains('incrementar')) {
         const productoId = e.target.getAttribute('data-id');
 
+        // Busca el producto en el arreglo de artículos del carrito y aumenta la cantidad
         articulosCarrito = articulosCarrito.map(producto => {
             if (producto.id === productoId) {
                 producto.cantidad++;
@@ -84,17 +100,18 @@ function incrementarProducto(e) {
             return producto;
         });
 
-        carritoHTML(); 
-        actualizarContador(); 
-        actualizarTotal(); 
+        carritoHTML(); // Actualiza el HTML del carrito
+        actualizarContador(); // Actualiza el contador
+        actualizarTotal(); // Actualiza el total
     }
 }
 
-
+// Decrementa la cantidad de un producto en el carrito
 function decrementarProducto(e) {
     if (e.target.classList.contains('decrementar')) {
         const productoId = e.target.getAttribute('data-id');
 
+        // Busca el producto en el arreglo de artículos del carrito y disminuye la cantidad
         articulosCarrito = articulosCarrito.map(producto => {
             if (producto.id === productoId && producto.cantidad > 0) {
                 producto.cantidad--;
@@ -103,7 +120,7 @@ function decrementarProducto(e) {
                 }
             }
             return producto;
-        }).filter(producto => producto !== null); 
+        }).filter(producto => producto !== null); // Elimina los productos con cantidad 0
 
         carritoHTML(); // Actualiza el HTML del carrito
         actualizarContador(); // Actualiza el contador
@@ -111,6 +128,7 @@ function decrementarProducto(e) {
     }
 }
 
+// Muestra los productos en el carrito de compras en el HTML
 function carritoHTML() {
     // Limpiar el HTML
     limpiarHTML();
@@ -134,18 +152,22 @@ function carritoHTML() {
             </td>
         `;
 
+        // Agrega el HTML del carrito en el tbody
         carrito.appendChild(row);
     });
 
+    // Actualizar el total
     actualizarTotal();
 }
 
+// Elimina los productos del tbody
 function limpiarHTML() {
     while (carrito.firstChild) {
         carrito.removeChild(carrito.firstChild);
     }
 }
 
+// Calcula y muestra el total de la compra
 function actualizarTotal() {
     const total = articulosCarrito.reduce((total, producto) => {
         const precio = parseFloat(producto.precio.replace('€', '').replace(',', '.'));
@@ -163,10 +185,13 @@ function actualizarTotal() {
     }
 }
 
+// Actualiza el contador de productos en el ícono del carrito
 function actualizarContador() {
     const totalProductos = articulosCarrito.reduce((total, producto) => total + producto.cantidad, 0);
     contadorProductos.textContent = totalProductos;
 }
+
+
 
 
 
