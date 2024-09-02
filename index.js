@@ -1,27 +1,28 @@
-// Variables globales
 const carrito = document.querySelector('#carrito tbody');
 const vaciarCarritoBtn = document.querySelector('#vaciar-carrito');
 const listaProductos = document.querySelector('#lista-1');
+const contadorProductos = document.querySelector('#contador-productos'); 
 let articulosCarrito = [];
 
-// Función para cargar todos los event listeners
 cargarEventListeners();
 function cargarEventListeners() {
-    // Agregar un producto al carrito al hacer click en "Agregar al Carrito"
     listaProductos.addEventListener('click', agregarProducto);
 
-    // Eliminar productos del carrito
     carrito.addEventListener('click', eliminarProducto);
+
+    carrito.addEventListener('click', incrementarProducto);
+
+    carrito.addEventListener('click', decrementarProducto);
 
     // Vaciar el carrito
     vaciarCarritoBtn.addEventListener('click', () => {
         articulosCarrito = []; // Resetea el carrito
         limpiarHTML(); // Elimina todo el HTML
         actualizarTotal(); // Actualiza el total a 0
+        actualizarContador(); // Resetea el contador
     });
 }
 
-// Función para agregar el producto al carrito
 function agregarProducto(e) {
     e.preventDefault();
     if (e.target.classList.contains('agregar-carrito')) {
@@ -30,7 +31,6 @@ function agregarProducto(e) {
     }
 }
 
-// Lee los datos del producto seleccionado
 function leerDatosProducto(producto) {
     const infoProducto = {
         imagen: producto.querySelector('img').src,
@@ -40,43 +40,77 @@ function leerDatosProducto(producto) {
         cantidad: 1
     };
 
-    // Revisa si un producto ya existe en el carrito
     const existe = articulosCarrito.some(producto => producto.id === infoProducto.id);
     if (existe) {
         // Actualizamos la cantidad
         const productos = articulosCarrito.map(producto => {
             if (producto.id === infoProducto.id) {
                 producto.cantidad++;
-                return producto; // Retorna el producto actualizado
+                return producto; 
             } else {
-                return producto; // Retorna los productos que no son los duplicados
+                return producto; 
             }
         });
         articulosCarrito = [...productos];
     } else {
-        // Agrega elementos al arreglo de carrito
         articulosCarrito = [...articulosCarrito, infoProducto];
     }
 
-    // Actualiza el HTML del carrito
     carritoHTML();
+    actualizarContador();
 }
 
-// Elimina un producto del carrito
 function eliminarProducto(e) {
     e.preventDefault();
     if (e.target.classList.contains('borrar')) {
         const productoId = e.target.getAttribute('data-id');
 
-        // Elimina del arreglo de artículos del carrito por el data-id
         articulosCarrito = articulosCarrito.filter(producto => producto.id !== productoId);
 
         carritoHTML(); // Itera sobre el carrito y muestra su HTML
         actualizarTotal(); // Actualiza el total
+        actualizarContador(); // Actualiza el contador
     }
 }
 
-// Muestra los productos en el carrito de compras en el HTML
+function incrementarProducto(e) {
+    if (e.target.classList.contains('incrementar')) {
+        const productoId = e.target.getAttribute('data-id');
+
+        articulosCarrito = articulosCarrito.map(producto => {
+            if (producto.id === productoId) {
+                producto.cantidad++;
+            }
+            return producto;
+        });
+
+        carritoHTML(); 
+        actualizarContador(); 
+        actualizarTotal(); 
+    }
+}
+
+
+function decrementarProducto(e) {
+    if (e.target.classList.contains('decrementar')) {
+        const productoId = e.target.getAttribute('data-id');
+
+        articulosCarrito = articulosCarrito.map(producto => {
+            if (producto.id === productoId && producto.cantidad > 0) {
+                producto.cantidad--;
+                if (producto.cantidad === 0) {
+                    return null; // Marca para eliminación
+                }
+            }
+            return producto;
+        }).filter(producto => producto !== null); 
+
+        carritoHTML(); // Actualiza el HTML del carrito
+        actualizarContador(); // Actualiza el contador
+        actualizarTotal(); // Actualiza el total
+    }
+}
+
 function carritoHTML() {
     // Limpiar el HTML
     limpiarHTML();
@@ -92,26 +126,26 @@ function carritoHTML() {
             <td>${producto.precio}</td>
             <td>${producto.cantidad}</td>
             <td>
-                <a href="#" class="borrar" data-id="${producto.id}">X</a>
+                <div class="acciones"> <!-- Contenedor para los botones -->
+                    <button class="decrementar" data-id="${producto.id}">-</button> <!-- Botón para decrementar -->
+                    <a href="#" class="borrar" data-id="${producto.id}">X</a> <!-- Botón para eliminar -->
+                    <button class="incrementar" data-id="${producto.id}">+</button> <!-- Botón para incrementar -->
+                </div>
             </td>
         `;
 
-        // Agrega el HTML del carrito en el tbody
         carrito.appendChild(row);
     });
 
-    // Actualizar el total
     actualizarTotal();
 }
 
-// Elimina los productos del tbody
 function limpiarHTML() {
     while (carrito.firstChild) {
         carrito.removeChild(carrito.firstChild);
     }
 }
 
-// Calcula y muestra el total de la compra
 function actualizarTotal() {
     const total = articulosCarrito.reduce((total, producto) => {
         const precio = parseFloat(producto.precio.replace('€', '').replace(',', '.'));
@@ -128,4 +162,11 @@ function actualizarTotal() {
         totalElement.textContent = `Total: ${total.toFixed(2)} €`;
     }
 }
+
+function actualizarContador() {
+    const totalProductos = articulosCarrito.reduce((total, producto) => total + producto.cantidad, 0);
+    contadorProductos.textContent = totalProductos;
+}
+
+
 
